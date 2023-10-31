@@ -1,27 +1,183 @@
-# AngularTreeview
+[![Build Status](https://travis-ci.org/leovo2708/ngx-treeview.svg)](https://travis-ci.org/leovo2708/ngx-treeview)
+<!-- [![codecov](https://codecov.io/gh/leovo2708/ngx-treeview/badge.svg)](https://codecov.io/gh/leovo2708/ngx-treeview) -->
+[![npm version](https://img.shields.io/npm/v/ngx-treeview.svg)](https://www.npmjs.com/package/ngx-treeview)
+[![npm](https://img.shields.io/npm/l/ngx-treeview.svg)]()
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.2.
+# ngx-treeview
 
-## Development server
+An Angular treeview component with checkbox
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Dependencies
 
-## Code scaffolding
+- [Angular](https://angular.io)
+- [Lodash](https://lodash.com)
+- [Bootstrap 4](https://getbootstrap.com)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This component is currently supporting Bootstrap 4. If you are using Bootstrap 4 alpha 6, please downgrade to the older version 1.0.10.
 
-## Build
+You can customize CSS yourself to break down dependencies to Bootstrap.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Features
 
-## Running unit tests
+- Unlimited tree level
+- State: disabled / collapse, expand
+- Filtering
+- Internationalization (i18n) support
+- Template
+- Checkbox with tri-state
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Demo
 
-## Running end-to-end tests
+[https://leovo2708.github.io/ngx-treeview/](https://leovo2708.github.io/ngx-treeview/)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Installation
 
-## Further help
+After install the above dependencies, install `ngx-treeview` via:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```shell
+npm install ngx-treeview --save
+```
+
+Once installed you need to import our main module in your application module:
+
+```js
+import { TreeviewModule } from 'ngx-treeview';
+
+@NgModule({
+  declarations: [AppComponent, ...],
+  imports: [TreeviewModule.forRoot(), ...],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
+```
+
+## Usage
+
+#### Treeview:
+
+```html
+<ngx-treeview
+  [config]="config"
+  [items]="items"
+  (selectedChange)="onSelectedChange($event)"
+  (filterChange)="onFilterChange($event)"
+>
+</ngx-treeview>
+```
+
+#### Treeview with dropdown:
+
+```html
+<ngx-dropdown-treeview
+  [buttonClass]="buttonClass"
+  [config]="config"
+  [items]="items"
+  (selectedChange)="onSelectedChange($event)"
+  (filterChange)="onFilterChange($event)"
+>
+</ngx-dropdown-treeview>
+```
+
+`config` is optional. This is the default configuration:
+
+```js
+{
+   hasAllCheckBox: true,
+   hasFilter: false,
+   hasCollapseExpand: false,
+   decoupleChildFromParent: false,
+   maxHeight: 500
+}
+```
+
+You can change default configuration easily because TreeviewConfig is injectable.
+
+#### Pipe `ngxTreeview`:
+
+To map your JSON objects to TreeItem objects.
+
+```html
+<ngx-dropdown-treeview
+  [config]="config"
+  [items]="items | ngxTreeview:'textField'"
+  (selectedChange)="onSelectedChange($event)"
+>
+</ngx-dropdown-treeview>
+```
+
+#### Create a TreeviewItem:
+
+```js
+const itCategory = new TreeviewItem({
+  text: "IT",
+  value: 9,
+  children: [
+    {
+      text: "Programming",
+      value: 91,
+      children: [
+        {
+          text: "Frontend",
+          value: 911,
+          children: [
+            { text: "Angular 1", value: 9111 },
+            { text: "Angular 2", value: 9112 },
+            { text: "ReactJS", value: 9113 },
+          ],
+        },
+        {
+          text: "Backend",
+          value: 912,
+          children: [
+            { text: "C#", value: 9121 },
+            { text: "Java", value: 9122 },
+            { text: "Python", value: 9123, checked: false },
+          ],
+        },
+      ],
+    },
+    {
+      text: "Networking",
+      value: 92,
+      children: [
+        { text: "Internet", value: 921 },
+        { text: "Security", value: 922 },
+      ],
+    },
+  ],
+});
+```
+
+You can pass the second paramater 'autoCorrectChecked' with value=true (default is false) in constructor of TreeviewItem to correct checked value of it and all of its descendants. In some cases, you need to push or pop children flexibly, checked of parent may be not correct. Then you need to call function correctChecked() to help to correct from root to its descendants.
+
+```js
+const vegetableCategory = new TreeviewItem({
+  text: "Vegetable",
+  value: 2,
+  children: [
+    { text: "Salad", value: 21 },
+    { text: "Potato", value: 22 },
+  ],
+});
+vegetableCategory.children.push(
+  new TreeviewItem({ text: "Mushroom", value: 23, checked: false })
+);
+vegetableCategory.correctChecked(); // need this to make 'Vegetable' node to change checked value from true to false
+```
+
+#### TreeviewEventParser:
+
+Extract data from list of checked TreeviewItem and send it in parameter of event selectedChange. Some built-in TreeviewEventParser:
+
+- DefaultTreeviewEventParser: return values of checked items.
+- DownlineTreeviewEventParser: return list of checked items in orginal order with their ancestors.
+- OrderDownlineTreeviewEventParser: return list of checked items in checked order with their ancestors. Note that: value of a leaf must be different from value of other leaves.
+
+#### Templating:
+
+See example 4 & 5.
+
+## Contributing
+
+I am very appreciate for your ideas, proposals and found bugs which you can leave in github issues. Thanks in advance!

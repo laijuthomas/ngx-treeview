@@ -1,6 +1,15 @@
 {
-  "name": "angular-treeview",
-  "version": "0.0.1",
+  "name": "@laijuthomas/ngx-treeview",
+  "version": "1.0.0",
+  "description": "An Angular treeview component with checkbox",
+  "author": "Laiju Thomas <iamlaijuthomas@gmail.com>",
+  "repository": "https://github.com/laijuthomas/ngx-treeview",
+  "homepage": "https://github.com/laijuthomas/ngx-treeview#readme",
+  "license": "MIT",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/laijuthomas/ngx-treeview/issues"
+  },
   "peerDependencies": {
     "@angular/common": "^16.0.0",
     "@angular/core": "^16.0.0"
@@ -8,5 +17,13 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "keywords": [
+    "angular",
+    "treeview",
+    "bootstrap",
+    "angular-treeview",
+    "ngx-treeview",
+    "angular 16"
+  ]
 }
