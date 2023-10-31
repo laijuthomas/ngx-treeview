@@ -9,7 +9,7 @@
     "build:demo": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng build --prod --base-href /ngx-treeview/ && node gh-pages.js"
+    "publish": "cd dist/angular-treeview npm publish --access=public"
   },
   "private": true,
   "dependencies": {
