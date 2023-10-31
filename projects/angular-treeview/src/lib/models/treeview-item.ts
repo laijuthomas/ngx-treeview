@@ -150,8 +150,8 @@ export class TreeviewItem {
       }
     } else {
       const selection = TreeviewHelper.concatSelection(this.internalChildren, checkedItems, uncheckedItems);
-      checkedItems = selection.checked;
-      uncheckedItems = selection.unchecked;
+      checkedItems = selection['checked'];
+      uncheckedItems = selection['unchecked'];
     }
 
     return {

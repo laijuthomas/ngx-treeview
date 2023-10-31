@@ -83,7 +83,7 @@ export class TreeviewComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const itemsSimpleChange = changes.items;
+    const itemsSimpleChange = changes['items'];
     if (!isNil(itemsSimpleChange) && !isNil(this.items)) {
       this.updateFilterItems();
       this.updateCollapsedOfAll();
@@ -146,8 +146,8 @@ export class TreeviewComponent implements OnChanges, OnInit {
     let uncheckedItems: TreeviewItem[] = [];
     if (!isNil(this.items)) {
       const selection = TreeviewHelper.concatSelection(this.items, checkedItems, uncheckedItems);
-      checkedItems = selection.checked;
-      uncheckedItems = selection.unchecked;
+      checkedItems = selection['checked'];
+      uncheckedItems = selection['unchecked'];
     }
 
     this.selection = {

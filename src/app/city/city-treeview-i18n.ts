@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { TreeviewSelection } from 'ngx-treeview';
+import { TreeviewSelection } from 'angular-treeview';
 import { I18n } from '../i18n';
 import { DefaultTreeviewI18n } from '../default-treeview-i18n';
 
 @Injectable()
 export class CityTreeviewI18n extends DefaultTreeviewI18n {
   constructor(
-    protected i18n: I18n
+    protected override i18n: I18n
   ) {
     super(i18n);
   }
 
-  getText(selection: TreeviewSelection): string {
+  override getText(selection: TreeviewSelection): string {
     if (selection.uncheckedItems.length === 0) {
       return this.i18n.language === 'en' ? 'All cities' : 'Tất cả thành phố';
     }
@@ -28,7 +28,7 @@ export class CityTreeviewI18n extends DefaultTreeviewI18n {
     }
   }
 
-  getFilterNoItemsFoundText(): string {
+  override getFilterNoItemsFoundText(): string {
     if (this.i18n.language === 'en') {
       return 'No cities found';
     } else {

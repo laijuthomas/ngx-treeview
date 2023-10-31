@@ -1,5 +1,5 @@
 /*
- * Public API Surface of ngx-treeview
+ * Public API Surface of angular-treeview
  */
 
 export * from './lib/treeview.module';

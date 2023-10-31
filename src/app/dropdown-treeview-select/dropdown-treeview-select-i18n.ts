@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TreeviewItem, TreeviewSelection, DefaultTreeviewI18n } from 'ngx-treeview';
+import { TreeviewItem, TreeviewSelection, DefaultTreeviewI18n } from 'angular-treeview';
 
 @Injectable()
 export class DropdownTreeviewSelectI18n extends DefaultTreeviewI18n {
@@ -13,7 +13,7 @@ export class DropdownTreeviewSelectI18n extends DefaultTreeviewI18n {
     return this.internalSelectedItem;
   }
 
-  getText(selection: TreeviewSelection): string {
+  override getText(selection: TreeviewSelection): string {
     return this.internalSelectedItem ? this.internalSelectedItem.text : 'Please select';
   }
 }

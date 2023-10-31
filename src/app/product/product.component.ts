@@ -3,15 +3,15 @@ import { isNil, remove, reverse } from 'lodash';
 import {
   TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
   TreeviewEventParser, OrderDownlineTreeviewEventParser, DownlineTreeviewItem
-} from 'ngx-treeview';
+} from 'angular-treeview';
 import { ProductService } from './product.service';
 
 @Injectable()
 export class ProductTreeviewConfig extends TreeviewConfig {
-  hasAllCheckBox = true;
-  hasFilter = true;
-  hasCollapseExpand = false;
-  maxHeight = 400;
+  override hasAllCheckBox = true;
+  override hasFilter = true;
+  override hasCollapseExpand = false;
+  override maxHeight = 400;
 }
 
 @Component({
